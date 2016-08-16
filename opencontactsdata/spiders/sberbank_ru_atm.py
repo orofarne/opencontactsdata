@@ -3,12 +3,14 @@
 import scrapy
 from io import BytesIO
 from openpyxl import Workbook, load_workbook
+import time
 
 class SberbankRUSpider(scrapy.Spider):
     name = 'sberbank_ru_atm'
     start_urls = ['http://www.sberbank.ru/common/img/uploaded/cards/atm.xlsx']
 
     def parse(self, response):
+        ts = time.time()
         wb = load_workbook(filename=BytesIO(response.body))
         sheet = wb.active
         for row in sheet.rows:
@@ -24,4 +26,5 @@ class SberbankRUSpider(scrapy.Spider):
                     'opening_hours': row[9].value,
                     'lat': row[12].value,
                     'lon': row[13].value,
+                    'crawl_time': ts,
                 }

@@ -14,7 +14,7 @@ class OpencontactsdataPipeline(object):
 
 class JsonWriterPipeline(object):
     def __init__(self):
-        self.file = open('items.jl', 'wb')
+        self.file = open('items.jl', 'ab')
 
     def process_item(self, item, spider):
         line = json.dumps(dict(item), ensure_ascii=False).encode('utf8') + "\n".encode('utf8')
