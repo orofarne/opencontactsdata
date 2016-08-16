@@ -4,8 +4,8 @@ import scrapy
 import csv
 import io
 
-class ShokoSpider(scrapy.Spider):
-    name = 'shokospider'
+class ShokoRUSpider(scrapy.Spider):
+    name = 'shoko_ru'
     start_urls = ['http://shoko.ru/moskva/adresa_kofeen/']
 
     def parse(self, response):
@@ -17,4 +17,4 @@ class ShokoSpider(scrapy.Spider):
         f = io.StringIO(response.text)
         reader = csv.reader(f, delimiter=',')
         for row in reader:
-            yield {'lat': row[0], 'lon': row[1], 'address': row[2], 'phone': row[3], 'opening_hours': row[4]}
+            yield {'source': 'shoko.ru', 'lat': row[0], 'lon': row[1], 'address': row[2], 'phone': row[3], 'opening_hours': row[4]}
