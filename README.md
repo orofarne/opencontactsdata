@@ -12,3 +12,8 @@ pip3 install -r req.list
 
 RUN
 ---
+
+```
+source .py/bin/activate
+./crawl.sh
+```
